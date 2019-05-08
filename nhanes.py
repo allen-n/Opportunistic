@@ -129,9 +129,31 @@ def preproc_dropna(df_col, args=None):
 
 #### Add your own preprocessing functions ####
 
+def PCA(X) :
+    """
+    Perform Principal Component Analysis.
+    This version uses SVD for better numerical performance when d >> n.
+        
+    Parameters
+    --------------------
+        X      -- numpy array of shape (n,d), features
+    
+    Returns
+    --------------------
+        U      -- numpy array of shape (d,d), d d-dimensional eigenvectors
+                  each column is a unit eigenvector; columns are sorted by eigenvalue
+        mu     -- numpy array of shape (d,), mean of input data X
+    """
+    n, d = X.shape
+    mu = np.mean(X, axis=0)
+    x, l, v = np.linalg.svd(X-mu)
+    l = np.hstack([l, np.zeros(v.shape[0] - l.shape[0], dtype=float)])
+    U = np.array([vi/1.0 \
+                  for (li, vi) \
+                  in sorted(zip(l, v), reverse=True, key=lambda x: x[0])]).T
+    return U, mu
+
 # Dataset loader
-
-
 class Dataset():
     """ 
     Dataset manager class

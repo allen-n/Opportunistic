@@ -1,5 +1,21 @@
 # CS205 Final Project - Spring 2019
 
+## Allen's Notes:
+### Feature Selection and Evaluation:
+* Initial idea: select an additional 30 features that _could_ be relevant
+* Justify features based on data supplied by the CDC [here](https://gis.cdc.gov/Cancer/USCS/DataViz.html).
+* Implement PCA to prune ~50 features selected in above step
+
+### Preprocessing & Feature Engineering:
+* Think about after step 1, dependant on selected features
+
+### Predictive Modeling:
+* Try several different weak learners to gauge efficacy of each
+* Tune hyperparameters on most promising weak learner
+* Look at ensemble methods (Adaboost, etc.) to see if predictive power can be increased 
+* Look at more complex models (NN, CNN, etc.)
+___
+
 ## The Task:
 In this project we will try and build a predicitve model to predict being positive to cancer or malignancy.
 - Using the features available at [CDC NHANES](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015), investigate what features you would like to use in your model. 
