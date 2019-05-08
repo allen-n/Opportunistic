@@ -25,8 +25,8 @@ class FeatureColumn:
 class NHANES:
     def __init__(self, db_path=None, columns=None):
         self.db_path = db_path
-        self.columns = columns  # Depricated
-        self.dataset = None  # Depricated
+        self.columns = columns  # Depreciated
+        self.dataset = None  # Depreciated
         self.column_data = None
         self.column_info = None
         self.df_features = None
