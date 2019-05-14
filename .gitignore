@@ -2,3 +2,4 @@ CDC/
 .ipynb_checkpoints/
 __pycache__/
 q
+.vscode
