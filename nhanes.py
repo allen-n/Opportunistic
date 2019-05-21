@@ -231,7 +231,119 @@ class Dataset():
                           preproc_real, None),
             # On a weight loss / low calorie diet?
             FeatureColumn('Dietary', 'DRQSDT1',
+                          preproc_onehot, None),
+            # 60 second heart-rate
+            FeatureColumn('Examination', 'BPXCHR',
                           preproc_real, None),
+            # 60 second pulse
+            FeatureColumn('Examination', 'BPXPLS',
+                          preproc_real, None),
+            # pulse regular or irregular
+            FeatureColumn('Examination', 'BPXPULS',
+                          preproc_onehot, None),
+            ### Added features ###
+
+            FeatureColumn('Laboratory', 'URXUAS', preproc_real,
+                          None),  # Urinary arsenic, total (ug/L)
+            FeatureColumn('Laboratory', 'LBXBPB', preproc_real,
+                          None),  # Blood lead (ug/dL)
+            FeatureColumn('Laboratory', 'LBXBCD', preproc_real,
+                          None),  # Blood cadmium (ug/L)
+            FeatureColumn('Laboratory', 'LBXTHG', preproc_real,
+                          None),  # Blood mercury, total (ug/L)
+            FeatureColumn('Laboratory', 'LBXBSE', preproc_real,
+                          None),  # Blood selenium (ug/L)
+            FeatureColumn('Laboratory', 'LBXBMN', preproc_real,
+                          None),  # Blood manganese (ug/L)
+            FeatureColumn('Laboratory', 'URXUHG', preproc_real,
+                          None),  # Urine Mercury (ng/mL)
+            FeatureColumn('Laboratory', 'URXUBA', preproc_real,
+                          None),  # Barium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUCD', preproc_real,
+                          None),  # Cadmium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUCO', preproc_real,
+                          None),  # Cobalt, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUCS', preproc_real,
+                          None),  # Cesium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUMO', preproc_real,
+                          None),  # Molybdenum, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUMN', preproc_real,
+                          None),  # Manganese, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUPB', preproc_real,
+                          None),  # Lead, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUSB', preproc_real,
+                          None),  # Antimony, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUSN', preproc_real,
+                          None),  # Tin, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUSR', preproc_real,
+                          None),  # Strontium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUTL', preproc_real,
+                          None),  # Thallium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUTU', preproc_real,
+                          None),  # Tungsten, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUUR', preproc_real,
+                          None),  # Uranium, urine (ug/L)
+            # Doctor ever said you were overweight
+            FeatureColumn('Questionnaire', 'MCQ080', preproc_onehot, None),
+            # Doctor told you to lose weight
+            FeatureColumn('Questionnaire', 'MCQ365a', preproc_onehot, None),
+            # Doctor told you to exercise
+            FeatureColumn('Questionnaire', 'MCQ365b', preproc_onehot, None),
+            # Doctor told you to reduce fat/calories
+            FeatureColumn('Questionnaire', 'MCQ365d', preproc_onehot, None),
+            # Doctor told you to reduce salt in diet
+            FeatureColumn('Questionnaire', 'MCQ365c', preproc_onehot, None),
+            # Are you now controlling or losing weight
+            FeatureColumn('Questionnaire', 'MCQ370a', preproc_onehot, None),
+            # Are you now increasing exercise
+            FeatureColumn('Questionnaire', 'MCQ370b', preproc_onehot, None),
+            # Are you now reducing salt in diet
+            FeatureColumn('Questionnaire', 'MCQ370c', preproc_onehot, None),
+            # Are you now reducing fat in diet
+            FeatureColumn('Questionnaire', 'MCQ370d', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'INDFMMPI', preproc_real, {
+                          'cutoff': 4}),  # Family monthly poverty level index
+            # Total savings/cash assets for the family
+            FeatureColumn('Questionnaire', 'IND310',
+                          preproc_real, {'cutoff': 6}),
+            FeatureColumn('Questionnaire', 'DBQ700', preproc_real, {
+                          'cutoff': 6}),  # How healthy is the diet
+            FeatureColumn('Questionnaire', 'DBD895', preproc_real, {
+                          'cutoff': 22}),  # of meals not home prepared
+            # of meals from fast food or pizza place
+            FeatureColumn('Questionnaire', 'DBD900',
+                          preproc_real, {'cutoff': 22}),
+            # Used nutrition info to choose fast foods
+            FeatureColumn('Questionnaire', 'CBQ540',
+                          preproc_real, {'cutoff': 3}),
+            FeatureColumn('Questionnaire', 'CBQ585', preproc_real, {
+                          'cutoff': 3}),  # Used nutrition info in restaurant
+            # Avg # alcoholic drinks/day - past 12 mos
+            FeatureColumn('Questionnaire', 'ALQ130',
+                          preproc_real, {'cutoff': 14}),
+            FeatureColumn('Questionnaire', 'ALQ141Q', preproc_real, {
+                          'cutoff': 22}),  # days have 4/5 drinks - past 12 mos
+            # Minutes walk/bicycle for transportation per day (average)
+            FeatureColumn('Questionnaire', 'PAD645',
+                          preproc_real, {'cutoff': 1200}),
+            # Past wk # days cardiovascular exercise
+            FeatureColumn('Questionnaire', 'PAQ677',
+                          preproc_real, {'cutoff': 7}),
+            FeatureColumn('Questionnaire', 'SLD012', preproc_real, {
+                          'cutoff': 14.5}),  # Sleep hours
+            # Ever told doctor had trouble sleeping?
+            FeatureColumn('Questionnaire', 'SLQ050',
+                          preproc_onehot, {'cutoff': 3}),
+            FeatureColumn('Questionnaire', 'SMQ621', preproc_onehot, {
+                          'cutoff': 8}),  # Cigarettes smoked in entire life
+            FeatureColumn('Questionnaire', 'SMQ905', preproc_onehot, {
+                          'cutoff': 30}),  # How many days used an e-cigarette?
+            # In past week # days person smoked inside
+            FeatureColumn('Questionnaire', 'SMD480',
+                          preproc_onehot, {'cutoff': 7}),
+            FeatureColumn('Questionnaire', 'SMDANY', preproc_onehot, {
+                          'cutoff': 3}),  # Used any tobacco product last 5 days?
+            ### end break ###
             # BMI
             FeatureColumn('Examination', 'BMXBMI',
                           preproc_real, None),
@@ -255,15 +367,6 @@ class Dataset():
                           preproc_real, {'cutoff': 2}),
             FeatureColumn('Questionnaire', 'ALQ120Q',
                           preproc_real, {'cutoff': 365}),
-            # Vigorous work activity
-            FeatureColumn('Questionnaire', 'PAQ605',
-                          preproc_real, {'cutoff': 2}),
-            FeatureColumn('Questionnaire', 'PAQ620',
-                          preproc_real, {'cutoff': 2}),
-            FeatureColumn('Questionnaire', 'PAQ180',
-                          preproc_real, {'cutoff': 4}),
-            FeatureColumn('Questionnaire', 'PAD615',
-                          preproc_real, {'cutoff': 780}),
             # Doctor told overweight (risk factor)
             FeatureColumn('Questionnaire', 'MCQ160J',
                           preproc_onehot, {'cutoff': 2}),
@@ -274,19 +377,7 @@ class Dataset():
             FeatureColumn('Questionnaire', 'SMQ020',
                           preproc_onehot, None),
             FeatureColumn('Questionnaire', 'SMD030',
-                          preproc_real, {'cutoff': 72}),
-            # Blood relatives with arthritis
-            FeatureColumn('Questionnaire', 'MCQ250D',
-                          preproc_onehot, {'cutoff': 2}),
-            # joint pain/aching/stiffness in past year
-            FeatureColumn('Questionnaire', 'MPQ010',
-                          preproc_onehot, {'cutoff': 2}),
-            # symptoms began only because of injury
-            FeatureColumn('Questionnaire', 'MPQ030',
-                          preproc_onehot, {'cutoff': 2}),
-            # how long experiencing pain
-            FeatureColumn('Questionnaire', 'MPQ110',
-                          preproc_real, {'cutoff': 4}),
+                          preproc_real, {'cutoff': 72})
         ]
         nhanes_dataset = NHANES(self.data_path, columns)
         df = nhanes_dataset.process()
