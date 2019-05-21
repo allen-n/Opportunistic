@@ -72,7 +72,7 @@ class NHANES:
                 df_col = pd.concat(df_col)
             except:
                 #raise Error('Failed to process' + field)
-                raise Exception('Failed to process' + field)
+                raise Exception('Failed to process ' + field)
             df.append(df_col)
         df = pd.concat(df, axis=1)
         #df = pd.merge(df, df_sel, how='outer')
@@ -179,107 +179,6 @@ class Dataset():
         self.targets = None
         self.costs = None
 
-    def load_arthritis(self, opts=None):
-        columns = [
-            # TARGET: systolic BP average
-            FeatureColumn('Questionnaire', 'MCQ160A',
-                          None, None),
-            # Gender
-            FeatureColumn('Demographics', 'RIAGENDR',
-                          preproc_real, None),
-            # Age at time of screening
-            FeatureColumn('Demographics', 'RIDAGEYR',
-                          preproc_real, None),
-            FeatureColumn('Demographics', 'RIDRETH3',
-                          preproc_onehot, None),
-            # Race/ethnicity
-            FeatureColumn('Demographics', 'RIDRETH1',
-                          preproc_onehot, None),
-            # Annual household income
-            FeatureColumn('Demographics', 'INDHHINC',
-                          preproc_real, {'cutoff': 11}),
-            # Education level
-            FeatureColumn('Demographics', 'DMDEDUC2',
-                          preproc_real, {'cutoff': 5}),
-            # BMI
-            FeatureColumn('Examination', 'BMXBMI',
-                          preproc_real, None),
-            # Waist
-            FeatureColumn('Examination', 'BMXWAIST',
-                          preproc_real, None),
-            # Height
-            FeatureColumn('Examination', 'BMXHT',
-                          preproc_real, None),
-            # Upper Leg Length
-            FeatureColumn('Examination', 'BMXLEG',
-                          preproc_real, None),
-            # Weight
-            FeatureColumn('Examination', 'BMXWT',
-                          preproc_real, None),
-            # Total Cholesterol
-            FeatureColumn('Laboratory', 'LBXTC',
-                          preproc_real, None),
-            # Alcohol consumption
-            FeatureColumn('Questionnaire', 'ALQ101',
-                          preproc_real, {'cutoff': 2}),
-            FeatureColumn('Questionnaire', 'ALQ120Q',
-                          preproc_real, {'cutoff': 365}),
-            # Vigorous work activity
-            FeatureColumn('Questionnaire', 'PAQ605',
-                          preproc_real, {'cutoff': 2}),
-            FeatureColumn('Questionnaire', 'PAQ620',
-                          preproc_real, {'cutoff': 2}),
-            FeatureColumn('Questionnaire', 'PAQ180',
-                          preproc_real, {'cutoff': 4}),
-            FeatureColumn('Questionnaire', 'PAD615',
-                          preproc_real, {'cutoff': 780}),
-            # Doctor told overweight (risk factor)
-            FeatureColumn('Questionnaire', 'MCQ160J',
-                          preproc_onehot, {'cutoff': 2}),
-            # Sleep
-            FeatureColumn('Questionnaire', 'SLD010H',
-                          preproc_real, {'cutoff': 12}),
-            # Smoking
-            FeatureColumn('Questionnaire', 'SMQ020',
-                          preproc_onehot, None),
-            FeatureColumn('Questionnaire', 'SMD030',
-                          preproc_real, {'cutoff': 72}),
-            # Blood relatives with arthritis
-            FeatureColumn('Questionnaire', 'MCQ250D',
-                          preproc_onehot, {'cutoff': 2}),
-            # joint pain/aching/stiffness in past year
-            FeatureColumn('Questionnaire', 'MPQ010',
-                          preproc_onehot, {'cutoff': 2}),
-            # symptoms began only because of injury
-            FeatureColumn('Questionnaire', 'MPQ030',
-                          preproc_onehot, {'cutoff': 2}),
-            # how long experiencing pain
-            FeatureColumn('Questionnaire', 'MPQ110',
-                          preproc_real, {'cutoff': 4}),
-        ]
-        nhanes_dataset = NHANES(self.data_path, columns)
-        df = nhanes_dataset.process()
-        fe_cols = df.drop(['MCQ160A'], axis=1)
-        features = fe_cols.values
-        target = df['MCQ160A'].values
-        # remove nan labeled samples
-        inds_valid = ~ np.isnan(target)
-        features = features[inds_valid]
-        target = target[inds_valid]
-
-        # Put each person in the corresponding bin
-        targets = np.zeros(target.shape[0])
-        targets[target == 1] = 0  # yes arthritis
-        targets[target == 2] = 1  # no arthritis
-
-       # random permutation
-        perm = np.random.permutation(targets.shape[0])
-        self.features = features[perm]
-        self.targets = targets[perm]
-        self.costs = [c.cost for c in columns[1:]]
-        self.costs = np.array(
-            [item for sublist in self.costs for item in sublist])
-
     #### Custom dataset loaders ####
 
     def load_cancer(self, opts=None):
@@ -293,17 +192,46 @@ class Dataset():
             # Age at time of screening
             FeatureColumn('Demographics', 'RIDAGEYR',
                           preproc_real, None),
+            # Recode of reported race and Hispanic origin
+            # information, with Non-Hispanic Asian Category
             FeatureColumn('Demographics', 'RIDRETH3',
                           preproc_onehot, None),
             # Race/ethnicity
             FeatureColumn('Demographics', 'RIDRETH1',
                           preproc_onehot, None),
             # Annual household income
-            FeatureColumn('Demographics', 'INDHHINC',
+            FeatureColumn('Demographics', 'INDHHIN2',
                           preproc_real, {'cutoff': 11}),
+            # Annual family income
+            FeatureColumn('Demographics', 'INDFMIN2',
+                          preproc_real, {'cutoff': 11}),
+            # Ratio of family income to poverty
+            FeatureColumn('Demographics', 'INDFMPIR',
+                          preproc_real, {'cutoff': 5}),
             # Education level
             FeatureColumn('Demographics', 'DMDEDUC2',
                           preproc_real, {'cutoff': 5}),
+            # Alcohol Consumed Day 1 (g)
+            FeatureColumn('Dietary', 'DR1TALCO',
+                          preproc_real, None),
+            # Kcal Consumed Day 1 (g)
+            FeatureColumn('Dietary', 'DR1TKCAL',
+                          preproc_real, None),
+            # Sugar Consumed Day 1 (g)
+            FeatureColumn('Dietary', 'DR1TSUGR',
+                          preproc_real, None),
+            # Alcohol Consumed Day 2 (g)
+            FeatureColumn('Dietary', 'DR2TALCO',
+                          preproc_real, None),
+            # Kcal Consumed Day 2 (g)
+            FeatureColumn('Dietary', 'DR2TKCAL',
+                          preproc_real, None),
+            # Sugar Consumed Day 3 (g)
+            FeatureColumn('Dietary', 'DR3TSUGR',
+                          preproc_real, None),
+            # On a weight loss / low calorie diet?
+            FeatureColumn('Dietary', 'DRQSDT1',
+                          preproc_real, None),
             # BMI
             FeatureColumn('Examination', 'BMXBMI',
                           preproc_real, None),

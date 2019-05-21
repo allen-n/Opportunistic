@@ -1,69 +1,69 @@
-Variable Name,Variable Description,Data File Name
-RIAGENDR,Participant gender,DEMO_I
-RIDAGEYR,Age in years at screening,DEMO_I
-RIDRETH3,"Recode of reported race and Hispanic origin information, with Non-Hispanic Asian Category",DEMO_I
-DMDEDUC2,Education level - Adults 20+,DEMO_I
-INDHHIN2,Annual household income,DEMO_I
-INDFMIN2,Annual family income,DEMO_I
-INDFMPIR,Ratio of family income to poverty,DEMO_I
-DR1TALCO,Alcohol consumed (g),DR1TOT_I
-DR1TKCAL,Kcal consumed,DR1TOT_I
-DR1TSUGR,Sugar Consumed (g),DR1TOT_I
-DRQSDT1,Weight loss /Low-Calorie Diet,DR1TOT_I
-DR2TALCO,Alcohol consumed (g),DR2TOT_I
-DR2TKCAL,Kcal consumed,DR2TOT_I
-DR2TSUGR,Sugar Consumed (g),DR2TOT_I
-BMXWT,Weight (kg),BMX_I
-BMXHT,Standing Height (cm),BMX_I
-BMXWAIST,Waist Circumference (cm),BMX_I
-BPXCHR,60-second heart rate,BPX_I
-BPXPLS,60-second pulse,BPX_I
-BPXPULS,Pulse regular or irregular,BPX_I
-BPXSY1,Systolic BP in mm Hg,BPX_I
-BPXDI1,Diastolic BP in mm Hg,BPX_I
-URXUAS,"Urinary arsenic, total (ug/L)",UTAS_I
-LBXBPB,Blood lead (ug/dL),PBCD_I
-LBXBCD,Blood cadmium (ug/L),PBCD_I
-LBXTHG,"Blood mercury, total (ug/L)",PBCD_I
-LBXBSE,Blood selenium (ug/L),PBCD_I
-LBXBMN,Blood manganese (ug/L),PBCD_I
-URXUHG,Urine Mercury (ng/mL),UHG_I
-URXUBA,"Barium, urine (ug/L)",UM_I
-URXUCD,"Cadmium, urine (ug/L)",UM_I
-URXUCO,"Cobalt, urine (ug/L)",UM_I
-URXUCS,"Cesium, urine (ug/L)",UM_I
-URXUMO,"Molybdenum, urine (ug/L)",UM_I
-URXUMN,"Manganese, urine (ug/L)",UM_I
-URXUPB,"Lead, urine (ug/L)",UM_I
-URXUSB,"Antimony, urine (ug/L)",UM_I
-URXUSN,"Tin, urine (ug/L)",UM_I
-URXUSR,"Strontium, urine (ug/L)",UM_I
-URXUTL,"Thallium, urine (ug/L)",UM_I
-URXUTU,"Tungsten, urine (ug/L)",UM_I
-URXUUR,"Uranium, urine (ug/L)",UM_I
-MCQ080,Doctor ever said you were overweight,MCQ_I
-MCQ365a,Doctor told you to lose weight,MCQ_I
-MCQ365b,Doctor told you to exercise,MCQ_I
-MCQ365d,Doctor told you to reduce fat/calories,MCQ_I
-MCQ365c,Doctor told you to reduce salt in diet,MCQ_I
-MCQ370a,Are you now controlling or losing weight,MCQ_I
-MCQ370b,Are you now increasing exercise,MCQ_I
-MCQ370c,Are you now reducing salt in diet,MCQ_I
-MCQ370d,Are you now reducing fat in diet,MCQ_I
-INDFMMPI,Family monthly poverty level index,INQ_I
-IND310,Total savings/cash assets for the family,INQ_I
-DBQ700,How healthy is the diet,DBQ_I
-DBD895,# of meals not home prepared,DBQ_I
-DBD900,# of meals from fast food or pizza place,DBQ_I
-CBQ540,Used nutrition info to choose fast foods,DBQ_I
-CBQ585,Used nutrition info in restaurant,DBQ_I
-ALQ130,Avg # alcoholic drinks/day - past 12 mos,ALQ_I
-ALQ141Q,# days have 4/5 drinks - past 12 mos,ALQ_I
-PAD645,Minutes walk/bicycle for transportation per day (average),PAQ_I
-PAQ677,Past wk # days cardiovascular exercise,PAQ_I
-SLD012,Sleep hours,SLQ_I
-SLQ050,Ever told doctor had trouble sleeping?,SLQ_I
-SMQ621,Cigarettes smoked in entire life,SMQ_I
-SMQ905,How many days used an e-cigarette?,SMQ_I
-SMD480,In past week # days person smoked inside,SMQFAM_I
-SMDANY,Used any tobacco product last 5 days?,SMQRTU_I
+Variable Name,Variable Description,Data File Name,Already there
+RIAGENDR,Participant gender,DEMO_I,X
+RIDAGEYR,Age in years at screening,DEMO_I,X
+RIDRETH3,"Recode of reported race and Hispanic origin information, with Non-Hispanic Asian Category",DEMO_I,X
+DMDEDUC2,Education level - Adults 20+,DEMO_I,X
+INDHHIN2,Annual household income,DEMO_I,X
+INDFMIN2,Annual family income,DEMO_I,X
+INDFMPIR,Ratio of family income to poverty,DEMO_I,X
+DR1TALCO,Alcohol consumed (g),DR1TOT_I,X
+DR1TKCAL,Kcal consumed,DR1TOT_I,
+DR1TSUGR,Sugar Consumed (g),DR1TOT_I,
+DRQSDT1,Weight loss /Low-Calorie Diet,DR1TOT_I,
+DR2TALCO,Alcohol consumed (g),DR2TOT_I,
+DR2TKCAL,Kcal consumed,DR2TOT_I,
+DR2TSUGR,Sugar Consumed (g),DR2TOT_I,
+BMXWT,Weight (kg),BMX_I,X
+BMXHT,Standing Height (cm),BMX_I,X
+BMXWAIST,Waist Circumference (cm),BMX_I,X
+BPXCHR,60-second heart rate,BPX_I,
+BPXPLS,60-second pulse,BPX_I,
+BPXPULS,Pulse regular or irregular,BPX_I,
+BPXSY1,Systolic BP in mm Hg,BPX_I,
+BPXDI1,Diastolic BP in mm Hg,BPX_I,
+URXUAS,"Urinary arsenic, total (ug/L)",UTAS_I,
+LBXBPB,Blood lead (ug/dL),PBCD_I,
+LBXBCD,Blood cadmium (ug/L),PBCD_I,
+LBXTHG,"Blood mercury, total (ug/L)",PBCD_I,
+LBXBSE,Blood selenium (ug/L),PBCD_I,
+LBXBMN,Blood manganese (ug/L),PBCD_I,
+URXUHG,Urine Mercury (ng/mL),UHG_I,
+URXUBA,"Barium, urine (ug/L)",UM_I,
+URXUCD,"Cadmium, urine (ug/L)",UM_I,
+URXUCO,"Cobalt, urine (ug/L)",UM_I,
+URXUCS,"Cesium, urine (ug/L)",UM_I,
+URXUMO,"Molybdenum, urine (ug/L)",UM_I,
+URXUMN,"Manganese, urine (ug/L)",UM_I,
+URXUPB,"Lead, urine (ug/L)",UM_I,
+URXUSB,"Antimony, urine (ug/L)",UM_I,
+URXUSN,"Tin, urine (ug/L)",UM_I,
+URXUSR,"Strontium, urine (ug/L)",UM_I,
+URXUTL,"Thallium, urine (ug/L)",UM_I,
+URXUTU,"Tungsten, urine (ug/L)",UM_I,
+URXUUR,"Uranium, urine (ug/L)",UM_I,
+MCQ080,Doctor ever said you were overweight,MCQ_I,
+MCQ365a,Doctor told you to lose weight,MCQ_I,
+MCQ365b,Doctor told you to exercise,MCQ_I,
+MCQ365d,Doctor told you to reduce fat/calories,MCQ_I,
+MCQ365c,Doctor told you to reduce salt in diet,MCQ_I,
+MCQ370a,Are you now controlling or losing weight,MCQ_I,
+MCQ370b,Are you now increasing exercise,MCQ_I,
+MCQ370c,Are you now reducing salt in diet,MCQ_I,
+MCQ370d,Are you now reducing fat in diet,MCQ_I,
+INDFMMPI,Family monthly poverty level index,INQ_I,
+IND310,Total savings/cash assets for the family,INQ_I,
+DBQ700,How healthy is the diet,DBQ_I,
+DBD895,# of meals not home prepared,DBQ_I,
+DBD900,# of meals from fast food or pizza place,DBQ_I,
+CBQ540,Used nutrition info to choose fast foods,DBQ_I,
+CBQ585,Used nutrition info in restaurant,DBQ_I,
+ALQ130,Avg # alcoholic drinks/day - past 12 mos,ALQ_I,
+ALQ141Q,# days have 4/5 drinks - past 12 mos,ALQ_I,
+PAD645,Minutes walk/bicycle for transportation per day (average),PAQ_I,
+PAQ677,Past wk # days cardiovascular exercise,PAQ_I,
+SLD012,Sleep hours,SLQ_I,
+SLQ050,Ever told doctor had trouble sleeping?,SLQ_I,
+SMQ621,Cigarettes smoked in entire life,SMQ_I,
+SMQ905,How many days used an e-cigarette?,SMQ_I,
+SMD480,In past week # days person smoked inside,SMQFAM_I,
+SMDANY,Used any tobacco product last 5 days?,SMQRTU_I,
