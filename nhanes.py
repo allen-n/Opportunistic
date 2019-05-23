@@ -74,8 +74,9 @@ class NHANES:
                 #raise Error('Failed to process' + field)
                 raise Exception('Failed to process ' + field)
             df.append(df_col)
+        # df = pd.DataFrame.drop_duplicates(df, inplace=True)
         df = pd.concat(df, axis=1)
-        #df = pd.merge(df, df_sel, how='outer')
+        # df = pd.merge(df, df_sel, how='outer')
         # do preprocessing steps
         df_proc = []  # [df['SEQN']]
         for fe_col in self.columns:
@@ -286,21 +287,21 @@ class Dataset():
             # Doctor ever said you were overweight
             FeatureColumn('Questionnaire', 'MCQ080', preproc_onehot, None),
             # Doctor told you to lose weight
-            FeatureColumn('Questionnaire', 'MCQ365a', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ365A', preproc_onehot, None),
             # Doctor told you to exercise
-            FeatureColumn('Questionnaire', 'MCQ365b', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ365B', preproc_onehot, None),
             # Doctor told you to reduce fat/calories
-            FeatureColumn('Questionnaire', 'MCQ365d', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ365D', preproc_onehot, None),
             # Doctor told you to reduce salt in diet
-            FeatureColumn('Questionnaire', 'MCQ365c', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ365C', preproc_onehot, None),
             # Are you now controlling or losing weight
-            FeatureColumn('Questionnaire', 'MCQ370a', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ370A', preproc_onehot, None),
             # Are you now increasing exercise
-            FeatureColumn('Questionnaire', 'MCQ370b', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ370B', preproc_onehot, None),
             # Are you now reducing salt in diet
-            FeatureColumn('Questionnaire', 'MCQ370c', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ370C', preproc_onehot, None),
             # Are you now reducing fat in diet
-            FeatureColumn('Questionnaire', 'MCQ370d', preproc_onehot, None),
+            FeatureColumn('Questionnaire', 'MCQ370D', preproc_onehot, None),
             FeatureColumn('Questionnaire', 'INDFMMPI', preproc_real, {
                           'cutoff': 4}),  # Family monthly poverty level index
             # Total savings/cash assets for the family
@@ -329,8 +330,8 @@ class Dataset():
             # Past wk # days cardiovascular exercise
             FeatureColumn('Questionnaire', 'PAQ677',
                           preproc_real, {'cutoff': 7}),
-            FeatureColumn('Questionnaire', 'SLD012', preproc_real, {
-                          'cutoff': 14.5}),  # Sleep hours
+            FeatureColumn('Questionnaire', 'SLD010H', preproc_real, {
+                          'cutoff': 12}),  # How much sleep do you get (hours)?
             # Ever told doctor had trouble sleeping?
             FeatureColumn('Questionnaire', 'SLQ050',
                           preproc_onehot, {'cutoff': 3}),
