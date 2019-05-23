@@ -226,8 +226,8 @@ class Dataset():
             # Kcal Consumed Day 2 (g)
             FeatureColumn('Dietary', 'DR2TKCAL',
                           preproc_real, None),
-            # Sugar Consumed Day 3 (g)
-            FeatureColumn('Dietary', 'DR3TSUGR',
+            # Sugar Consumed Day 2 (g)
+            FeatureColumn('Dietary', 'DR2TSUGR',
                           preproc_real, None),
             # On a weight loss / low calorie diet?
             FeatureColumn('Dietary', 'DRQSDT1',
