@@ -20,6 +20,9 @@ class FeatureColumn:
         self.args = args
         self.data = None
         self.cost = cost
+    
+    def get_field(self):
+        return self.field
 
 
 class NHANES:
@@ -186,6 +189,7 @@ class Dataset():
             self.data_path = data_path
         # feature and target vecotrs
         self.features = None
+        self.feature_labels = None
         self.targets = None
         self.costs = None
 
@@ -418,6 +422,8 @@ class Dataset():
         df = nhanes_dataset.process()
         fe_cols = df.drop(['MCQ220'], axis=1)
         features = fe_cols.values
+        feature_labels = pd.DataFrame([column.get_field() for column in columns])
+        # feature_labels = feature_labels.drop(['MCQ220'], axis=1)
         target = df['MCQ220'].values
         # remove nan labeled samples
         inds_valid = ~ np.isnan(target)
@@ -426,13 +432,14 @@ class Dataset():
 
         # Put each person in the corresponding bin
         targets = np.zeros(target.shape[0])
-        targets[target == 1] = 0  # yes arthritis
-        targets[target == 2] = 1  # no arthritis
+        targets[target == 1] = 0  # yes cancer
+        targets[target == 2] = 1  # no cancer
 
        # random permutation
         perm = np.random.permutation(targets.shape[0])
         self.features = features[perm]
         self.targets = targets[perm]
+        self.feature_labels = feature_labels
         self.costs = [c.cost for c in columns[1:]]
         self.costs = np.array(
             [item for sublist in self.costs for item in sublist])
