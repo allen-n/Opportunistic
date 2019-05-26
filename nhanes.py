@@ -109,6 +109,7 @@ def preproc_real(df_col, args=None):
     df_col[df_col > args['cutoff']] = np.nan
     # nan replaced by mean
     df_col[pd.isna(df_col)] = df_col.mean()
+    # df_col.apply(lambda x: x.fillna(x.mean()),axis=0)
     # statistical normalization
     df_col = (df_col-df_col.mean()) / df_col.std()
     return df_col
@@ -340,26 +341,27 @@ class Dataset():
             #               preproc_real, {'cutoff': 3}),
             # FeatureColumn('Questionnaire', 'CBQ585', preproc_real, {
             #               'cutoff': 3}),  # Used nutrition info in restaurant
-            # # Avg # alcoholic drinks/day - past 12 mos
-            # FeatureColumn('Questionnaire', 'ALQ130',
-            #               preproc_real, {'cutoff': 14}),
-            # FeatureColumn('Questionnaire', 'ALQ141Q', preproc_real, {
-            #               'cutoff': 22}),  # days have 4/5 drinks - past 12 mos
-            # # Minutes walk/bicycle for transportation per day (average)
-            # FeatureColumn('Questionnaire', 'PAD645',
-            #               preproc_real, {'cutoff': 1200}),
-            # # Past wk # days cardiovascular exercise
-            # FeatureColumn('Questionnaire', 'PAQ677',
-            #               preproc_real, {'cutoff': 7}),
-            # FeatureColumn('Questionnaire', 'SLD010H', preproc_real, {
-            #               'cutoff': 12}),  # How much sleep do you get (hours)?
+            # Avg # alcoholic drinks/day - past 12 mos
+            FeatureColumn('Questionnaire', 'ALQ130',
+                          preproc_real, {'cutoff': 14}),
+            # days have 4/5 drinks - past 12 mos
+            FeatureColumn('Questionnaire', 'ALQ141Q', preproc_real, {
+                          'cutoff': 22}),
+            # Minutes walk/bicycle for transportation per day (average)
+            FeatureColumn('Questionnaire', 'PAD645',
+                          preproc_real, {'cutoff': 1200}),
+            # Past wk # days cardiovascular exercise
+            FeatureColumn('Questionnaire', 'PAQ677',
+                          preproc_real, {'cutoff': 7}),
             # Ever told doctor had trouble sleeping?
-            # FeatureColumn('Questionnaire', 'SLQ050',
-            #               preproc_onehot, {'cutoff': 3}),
-            # FeatureColumn('Questionnaire', 'SMQ621', preproc_real, {
-            #               'cutoff': 8}),  # Cigarettes smoked in entire life
-            # FeatureColumn('Questionnaire', 'SMQ905', preproc_real, {
-            #               'cutoff': 30}),  # How many days used an e-cigarette?
+            FeatureColumn('Questionnaire', 'SLQ050',
+                          preproc_onehot, {'cutoff': 3}),
+            # Cigarettes smoked in entire life
+            FeatureColumn('Questionnaire', 'SMQ621', preproc_real, {
+                          'cutoff': 8}),
+            # How many days used an e-cigarette?
+            FeatureColumn('Questionnaire', 'SMQ905', preproc_real, {
+                          'cutoff': 30}),
             # In past week # days person smoked inside
             FeatureColumn('Questionnaire', 'SMD480',
                           preproc_real, {'cutoff': 7}),
