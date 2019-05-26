@@ -73,8 +73,8 @@ class NHANES:
             except:
                 #raise Error('Failed to process' + field)
                 raise Exception('Failed to process ' + field)
+            df_col = df_col.loc[~df_col.index.duplicated()]
             df.append(df_col)
-        # df = pd.DataFrame.drop_duplicates(df, inplace=True)
         df = pd.concat(df, axis=1)
         # df = pd.merge(df, df_sel, how='outer')
         # do preprocessing steps
@@ -109,7 +109,6 @@ def preproc_real(df_col, args=None):
     df_col[df_col > args['cutoff']] = np.nan
     # nan replaced by mean
     df_col[pd.isna(df_col)] = df_col.mean()
-    # df_col.apply(lambda x: x.fillna(x.mean()),axis=0)
     # statistical normalization
     df_col = (df_col-df_col.mean()) / df_col.std()
     return df_col
@@ -121,11 +120,6 @@ def preproc_cutoff(df_col, cutoff_val=None):
     # other answers as nan
     df_col[df_col > cutoff_val] = np.nan
     df_col = df_col.dropna(how='any')
-    print("SIZE OF NAN:")
-    print(np.where(df_col >= np.finfo(np.float32).max))
-    print(np.where(df_col == np.nan))
-    print("THE DATAFRAME\n")
-    print(df_col)
     return df_col
 
 
@@ -259,88 +253,105 @@ class Dataset():
                           preproc_onehot, None),
             ### Added features ###
 
-            # ERROR HERE
-
-            # FeatureColumn('Laboratory', 'URXUAS', preproc_real,
-            #               None),  # Urinary arsenic, total (ug/L)
-            # FeatureColumn('Laboratory', 'LBXBPB', preproc_real,
-            #               None),  # Blood lead (ug/dL)
-            # FeatureColumn('Laboratory', 'LBXBCD', preproc_real,
-            #               None),  # Blood cadmium (ug/L)
-            # FeatureColumn('Laboratory', 'LBXTHG', preproc_real,
-            #               None),  # Blood mercury, total (ug/L)
-            # FeatureColumn('Laboratory', 'LBXBSE', preproc_real,
-            #               None),  # Blood selenium (ug/L)
-            # FeatureColumn('Laboratory', 'LBXBMN', preproc_real,
-            #               None),  # Blood manganese (ug/L)
-            # FeatureColumn('Laboratory', 'URXUHG', preproc_real,
-            #               None),  # Urine Mercury (ng/mL)
-            # FeatureColumn('Laboratory', 'URXUBA', preproc_real,
-            #               None),  # Barium, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUCD', preproc_real,
-            #               None),  # Cadmium, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUCO', preproc_real,
-            #               None),  # Cobalt, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUCS', preproc_real,
-            #               None),  # Cesium, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUMO', preproc_real,
-            #               None),  # Molybdenum, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUMN', preproc_real,
-            #               None),  # Manganese, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUPB', preproc_real,
-            #               None),  # Lead, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUSB', preproc_real,
-            #               None),  # Antimony, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUSN', preproc_real,
-            #               None),  # Tin, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUSR', preproc_real,
-            #               None),  # Strontium, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUTL', preproc_real,
-            #               None),  # Thallium, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUTU', preproc_real,
-            #               None),  # Tungsten, urine (ug/L)
-            # FeatureColumn('Laboratory', 'URXUUR', preproc_real,
-            #               None),  # Uranium, urine (ug/L)
-
-            # ERROR ABOVE HERE
-
-            # ### GRP 2
-
-            # # Doctor ever said you were overweight
-            # FeatureColumn('Questionnaire', 'MCQ080', preproc_onehot, None),
-            # # Doctor told you to lose weight
-            # FeatureColumn('Questionnaire', 'MCQ365A', preproc_onehot, None),
-            # # Doctor told you to exercise
-            # FeatureColumn('Questionnaire', 'MCQ365B', preproc_onehot, None),
-            # # Doctor told you to reduce fat/calories
-            # FeatureColumn('Questionnaire', 'MCQ365D', preproc_onehot, None),
-            # # Doctor told you to reduce salt in diet
-            # FeatureColumn('Questionnaire', 'MCQ365C', preproc_onehot, None),
-            # # Are you now controlling or losing weight
-            # FeatureColumn('Questionnaire', 'MCQ370A', preproc_onehot, None),
-            # # Are you now increasing exercise
-            # FeatureColumn('Questionnaire', 'MCQ370B', preproc_onehot, None),
-            # # Are you now reducing salt in diet
-            # FeatureColumn('Questionnaire', 'MCQ370C', preproc_onehot, None),
-            # # Are you now reducing fat in diet
-            # FeatureColumn('Questionnaire', 'MCQ370D', preproc_onehot, None),
-            # FeatureColumn('Questionnaire', 'INDFMMPI', preproc_real, {
-            #               'cutoff': 4}),  # Family monthly poverty level index
-            # # Total savings/cash assets for the family
-            # FeatureColumn('Questionnaire', 'IND310',
-            #               preproc_real, {'cutoff': 6}),
-            # FeatureColumn('Questionnaire', 'DBQ700', preproc_real, {
-            #               'cutoff': 6}),  # How healthy is the diet
-            # FeatureColumn('Questionnaire', 'DBD895', preproc_real, {
-            #               'cutoff': 22}),  # of meals not home prepared
-            # # of meals from fast food or pizza place
-            # FeatureColumn('Questionnaire', 'DBD900',
-            #               preproc_real, {'cutoff': 22}),
-            # # Used nutrition info to choose fast foods
-            # FeatureColumn('Questionnaire', 'CBQ540',
-            #               preproc_real, {'cutoff': 3}),
-            # FeatureColumn('Questionnaire', 'CBQ585', preproc_real, {
-            #               'cutoff': 3}),  # Used nutrition info in restaurant
+            # Urinary arsenic, total (ug/L)
+            FeatureColumn('Laboratory', 'URXUAS', preproc_real,
+                          None),
+            # Blood lead (ug/dL)
+            FeatureColumn('Laboratory', 'LBXBPB', preproc_real,
+                          None),
+            # Blood cadmium (ug/L)
+            FeatureColumn('Laboratory', 'LBXBCD', preproc_real,
+                          None),
+            # Blood mercury, total (ug/L)
+            FeatureColumn('Laboratory', 'LBXTHG', preproc_real,
+                          None),
+            # Blood selenium (ug/L)
+            FeatureColumn('Laboratory', 'LBXBSE', preproc_real,
+                          None),
+            # Blood manganese (ug/L)
+            FeatureColumn('Laboratory', 'LBXBMN', preproc_real,
+                          None),
+            # Urine Mercury (ng/mL)
+            FeatureColumn('Laboratory', 'URXUHG', preproc_real,
+                          None),
+            # Barium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUBA', preproc_real,
+                          None),
+            # Cadmium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUCD', preproc_real,
+                          None),
+            # Cobalt, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUCO', preproc_real,
+                          None),
+            # Cesium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUCS', preproc_real,
+                          None),
+            # Molybdenum, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUMO', preproc_real,
+                          None),
+            # Manganese, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUMN', preproc_real,
+                          None),
+            # Lead, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUPB', preproc_real,
+                          None),
+            # Antimony, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUSB', preproc_real,
+                          None),
+            # Tin, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUSN', preproc_real,
+                          None),
+            # Strontium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUSR', preproc_real,
+                          None),
+            # Thallium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUTL', preproc_real,
+                          None),
+            # Tungsten, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUTU', preproc_real,
+                          None),
+            # Uranium, urine (ug/L)
+            FeatureColumn('Laboratory', 'URXUUR', preproc_real,
+                          None),
+            # Doctor ever said you were overweight
+            FeatureColumn('Questionnaire', 'MCQ080', preproc_onehot, None),
+            # Doctor told you to lose weight
+            FeatureColumn('Questionnaire', 'MCQ365A', preproc_onehot, None),
+            # Doctor told you to exercise
+            FeatureColumn('Questionnaire', 'MCQ365B', preproc_onehot, None),
+            # Doctor told you to reduce fat/calories
+            FeatureColumn('Questionnaire', 'MCQ365D', preproc_onehot, None),
+            # Doctor told you to reduce salt in diet
+            FeatureColumn('Questionnaire', 'MCQ365C', preproc_onehot, None),
+            # Are you now controlling or losing weight
+            FeatureColumn('Questionnaire', 'MCQ370A', preproc_onehot, None),
+            # Are you now increasing exercise
+            FeatureColumn('Questionnaire', 'MCQ370B', preproc_onehot, None),
+            # Are you now reducing salt in diet
+            FeatureColumn('Questionnaire', 'MCQ370C', preproc_onehot, None),
+            # Are you now reducing fat in diet
+            FeatureColumn('Questionnaire', 'MCQ370D', preproc_onehot, None),
+            # Family monthly poverty level index
+            FeatureColumn('Questionnaire', 'INDFMMPI', preproc_real, {
+                          'cutoff': 4}),
+            # Total savings/cash assets for the family
+            FeatureColumn('Questionnaire', 'IND310',
+                          preproc_real, {'cutoff': 6}),
+            # How healthy is the diet
+            FeatureColumn('Questionnaire', 'DBQ700', preproc_real, {
+                          'cutoff': 6}),
+            # of meals not home prepared
+            FeatureColumn('Questionnaire', 'DBD895', preproc_real, {
+                          'cutoff': 22}),
+            # of meals from fast food or pizza place
+            FeatureColumn('Questionnaire', 'DBD900',
+                          preproc_real, {'cutoff': 22}),
+            # Used nutrition info to choose fast foods
+            FeatureColumn('Questionnaire', 'CBQ540',
+                          preproc_real, {'cutoff': 3}),
+            # Used nutrition info in restaurant
+            FeatureColumn('Questionnaire', 'CBQ585', preproc_real, {
+                          'cutoff': 3}),
             # Avg # alcoholic drinks/day - past 12 mos
             FeatureColumn('Questionnaire', 'ALQ130',
                           preproc_real, {'cutoff': 14}),
@@ -365,12 +376,8 @@ class Dataset():
             # In past week # days person smoked inside
             FeatureColumn('Questionnaire', 'SMD480',
                           preproc_real, {'cutoff': 7}),
-            # # Used any tobacco product last 5 days?
-            # FeatureColumn('Questionnaire', 'SMDANY',
-            #               preproc_cutoff, 2),
-            ### end break ###
 
-            # GRP 2 END
+            ### End Added Features ###
 
             # BMI
             FeatureColumn('Examination', 'BMXBMI',

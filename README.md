@@ -10,9 +10,6 @@ Sci-Kit Learn Feature Selection Module Docs [here](https://scikit-learn.org/stab
 
 70 initially selected labels in [resources/initial_labels.csv](/resources/initial_labels.csv)
 
-## Current errors:
-* Line 111 nhanes.py: ValueError: Must specify axis=0 or 1
-* 
 
 ## Allen's Notes:
 ### Feature Selection and Evaluation:
