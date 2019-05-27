@@ -20,7 +20,7 @@ class FeatureColumn:
         self.args = args
         self.data = None
         self.cost = cost
-    
+
     def get_field(self):
         return self.field
 
@@ -67,6 +67,7 @@ class NHANES:
                 if not sel_cols:
                     continue
                 else:
+                    # this might be more than one column for a particular field
                     df_tmp = df_tmp[['SEQN'] + list(sel_cols)]
                     df_tmp.set_index('SEQN', inplace=True)
                     df_col.append(df_tmp)
@@ -78,6 +79,7 @@ class NHANES:
                 raise Exception('Failed to process ' + field)
             df_col = df_col.loc[~df_col.index.duplicated()]
             df.append(df_col)
+
         df = pd.concat(df, axis=1)
         # df = pd.merge(df, df_sel, how='outer')
         # do preprocessing steps
@@ -422,7 +424,8 @@ class Dataset():
         df = nhanes_dataset.process()
         fe_cols = df.drop(['MCQ220'], axis=1)
         features = fe_cols.values
-        feature_labels = pd.DataFrame([column.get_field() for column in columns])
+        feature_labels = pd.DataFrame(
+            [column.get_field() for column in columns])
         # feature_labels = feature_labels.drop(['MCQ220'], axis=1)
         target = df['MCQ220'].values
         # remove nan labeled samples
