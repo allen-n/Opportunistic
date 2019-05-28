@@ -78,7 +78,7 @@ class NHANES:
                 #raise Error('Failed to process' + field)
                 raise Exception('Failed to process ' + field)
             df_col = df_col.loc[~df_col.index.duplicated()]
-            df.append(df_col)
+            df.append(df_col) # TODO: ADD label to header row
 
         df = pd.concat(df, axis=1)
         # df = pd.merge(df, df_sel, how='outer')
@@ -129,13 +129,13 @@ def preproc_cutoff(df_col, cutoff_val=None):
 
 
 def preproc_impute(df_col, args=None):
-    # nan replaced by mean
+    # nan replaced by mean, can also use expected values or global mean from other research
     df_col[pd.isna(df_col)] = df_col.mean()
     return df_col
 
 
 def preproc_cut(df_col, bins):
-    # limit values to the bins range
+    # limit values to the bins range, useful for things like age where you only want bucket
     df_col = df_col[df_col >= bins[0]]
     df_col = df_col[df_col <= bins[-1]]
     return pd.cut(df_col.iloc[:, 0], bins, labels=False)
@@ -434,7 +434,7 @@ class Dataset():
         target = target[inds_valid]
 
         # Put each person in the corresponding bin
-        targets = np.zeros(target.shape[0])
+        targets = np.full((target.shape[0]), 3)
         targets[target == 1] = 0  # yes cancer
         targets[target == 2] = 1  # no cancer
 
