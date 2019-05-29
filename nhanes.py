@@ -78,10 +78,12 @@ class NHANES:
                 #raise Error('Failed to process' + field)
                 raise Exception('Failed to process ' + field)
             df_col = df_col.loc[~df_col.index.duplicated()]
-            df.append(df_col) # TODO: ADD label to header row
+            df.append(df_col)
 
         df = pd.concat(df, axis=1)
-        # df = pd.merge(df, df_sel, how='outer')
+        print("DATASET VALUES PREPROC:")
+        print(df.values)
+
         # do preprocessing steps
         df_proc = []  # [df['SEQN']]
         for fe_col in self.columns:
@@ -99,6 +101,9 @@ class NHANES:
                 fe_col.cost = [fe_col.cost]
             df_proc.append(prepr_col)
         self.dataset = pd.concat(df_proc, axis=1)
+
+        print("DATASET VALUES POSTPROC:")
+        print(self.dataset.values)
         return self.dataset
 
 
@@ -423,26 +428,27 @@ class Dataset():
         nhanes_dataset = NHANES(self.data_path, columns)
         df = nhanes_dataset.process()
         fe_cols = df.drop(['MCQ220'], axis=1)
-        features = fe_cols.values
-        feature_labels = pd.DataFrame(
-            [column.get_field() for column in columns])
-        # feature_labels = feature_labels.drop(['MCQ220'], axis=1)
-        target = df['MCQ220'].values
+        features = fe_cols  # .values # To keep labels
+        target = df['MCQ220']  # .values # To keep labels
         # remove nan labeled samples
-        inds_valid = ~ np.isnan(target)
+        # inds_valid = ~ np.isnan(target)
+        # features = features[inds_valid]
+        # target = target[inds_valid]
+        inds_valid = ~ pd.isna(target)
         features = features[inds_valid]
         target = target[inds_valid]
+        
 
         # Put each person in the corresponding bin
         targets = np.full((target.shape[0]), 3)
         targets[target == 1] = 0  # yes cancer
         targets[target == 2] = 1  # no cancer
+        targets = pd.DataFrame(data=targets.flatten())
 
        # random permutation
         perm = np.random.permutation(targets.shape[0])
-        self.features = features[perm]
-        self.targets = targets[perm]
-        self.feature_labels = feature_labels
+        self.features = features.iloc[perm]
+        self.targets = targets.iloc[perm]
         self.costs = [c.cost for c in columns[1:]]
         self.costs = np.array(
             [item for sublist in self.costs for item in sublist])
