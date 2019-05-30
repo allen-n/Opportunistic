@@ -130,8 +130,8 @@ def preproc_discrete(df_col, args=None):
     df_col[df_col > args['cutoff']] = np.nan
     # nan replaced by mean
     df_col[pd.isna(df_col)] = df_col.mean()
-    # statistical normalization
-    df_col = (df_col-df_col.min()) / (df_col.max() - df_col.min())
+    # statistical standardization
+    df_col = (df_col - df_col.min()) / (df_col.max() - df_col.min())
     return df_col
 
 
