@@ -105,6 +105,9 @@ class NHANES:
 
 # Preprocessing functions
 def preproc_onehot(df_col, args=None):
+    if args is not None:
+        if args['impute'] == 'mode':
+            df_col[pd.isna(df_col)] = df_col.mode()
     return pd.get_dummies(df_col, prefix=df_col.name, prefix_sep='#')
 
 
@@ -117,6 +120,18 @@ def preproc_real(df_col, args=None):
     df_col[pd.isna(df_col)] = df_col.mean()
     # statistical normalization
     df_col = (df_col-df_col.mean()) / df_col.std()
+    return df_col
+
+
+def preproc_discrete(df_col, args=None):
+    if args is None:
+        args = {'cutoff': np.inf}
+    # other answers as nan
+    df_col[df_col > args['cutoff']] = np.nan
+    # nan replaced by mean
+    df_col[pd.isna(df_col)] = df_col.mean()
+    # statistical normalization
+    df_col = (df_col-df_col.min()) / (df_col.max() - df_col.min())
     return df_col
 
 
@@ -148,6 +163,12 @@ def preproc_dropna(df_col, args=None):
 
 #### Add your own preprocessing functions ####
 
+
+# TODO: modify PCA to use dataframes for preprocessing
+# Split features into discrete and continuous and categorical
+# normalize discrete and standardize continuous with new preprocessing functions
+# https://medium.com/datadriveninvestor/data-preprocessing-for-machine-learning-188e9eef1d2c
+# http://www.simafore.com/blog/bid/109599/Feature-selection-mutual-information-vs-other-commonly-used-methods
 
 def PCA(X):
     """
@@ -205,7 +226,7 @@ class Dataset():
                           None, None),
             # Gender
             FeatureColumn('Demographics', 'RIAGENDR',
-                          preproc_real, None),
+                          preproc_onehot, None),
             # Age at time of screening
             FeatureColumn('Demographics', 'RIDAGEYR',
                           preproc_real, None),
@@ -213,21 +234,18 @@ class Dataset():
             # information, with Non-Hispanic Asian Category
             FeatureColumn('Demographics', 'RIDRETH3',
                           preproc_onehot, None),
-            # Race/ethnicity
-            FeatureColumn('Demographics', 'RIDRETH1',
-                          preproc_onehot, None),
             # Annual household income
             FeatureColumn('Demographics', 'INDHHIN2',
-                          preproc_real, {'cutoff': 11}),
+                          preproc_discrete, {'cutoff': 15}),
             # Annual family income
             FeatureColumn('Demographics', 'INDFMIN2',
-                          preproc_real, {'cutoff': 11}),
+                          preproc_discrete, {'cutoff': 15}),
             # Ratio of family income to poverty
             FeatureColumn('Demographics', 'INDFMPIR',
                           preproc_real, {'cutoff': 5}),
             # Education level
             FeatureColumn('Demographics', 'DMDEDUC2',
-                          preproc_real, {'cutoff': 5}),
+                          preproc_onehot, None),
             # Alcohol Consumed Day 1 (g)
             FeatureColumn('Dietary', 'DR1TALCO',
                           preproc_real, None),
@@ -340,13 +358,12 @@ class Dataset():
             FeatureColumn('Questionnaire', 'MCQ370D', preproc_onehot, None),
             # Family monthly poverty level index
             FeatureColumn('Questionnaire', 'INDFMMPI', preproc_real, {
-                          'cutoff': 4}),
+                          'cutoff': 5}),
             # Total savings/cash assets for the family
             FeatureColumn('Questionnaire', 'IND310',
                           preproc_real, {'cutoff': 6}),
             # How healthy is the diet
-            FeatureColumn('Questionnaire', 'DBQ700', preproc_real, {
-                          'cutoff': 6}),
+            FeatureColumn('Questionnaire', 'DBQ700', preproc_onehot, None),
             # of meals not home prepared
             FeatureColumn('Questionnaire', 'DBD895', preproc_real, {
                           'cutoff': 22}),
@@ -357,8 +374,7 @@ class Dataset():
             FeatureColumn('Questionnaire', 'CBQ540',
                           preproc_real, {'cutoff': 3}),
             # Used nutrition info in restaurant
-            FeatureColumn('Questionnaire', 'CBQ585', preproc_real, {
-                          'cutoff': 3}),
+            FeatureColumn('Questionnaire', 'CBQ585', preproc_onehot, None),
             # Avg # alcoholic drinks/day - past 12 mos
             FeatureColumn('Questionnaire', 'ALQ130',
                           preproc_real, {'cutoff': 14}),
@@ -375,7 +391,7 @@ class Dataset():
             FeatureColumn('Questionnaire', 'SLQ050',
                           preproc_onehot, {'cutoff': 3}),
             # Cigarettes smoked in entire life
-            FeatureColumn('Questionnaire', 'SMQ621', preproc_real, {
+            FeatureColumn('Questionnaire', 'SMQ621', preproc_discrete, {
                           'cutoff': 8}),
             # How many days used an e-cigarette?
             FeatureColumn('Questionnaire', 'SMQ905', preproc_real, {
