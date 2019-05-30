@@ -81,8 +81,6 @@ class NHANES:
             df.append(df_col)
 
         df = pd.concat(df, axis=1)
-        print("DATASET VALUES PREPROC:")
-        print(df.values)
 
         # do preprocessing steps
         df_proc = []  # [df['SEQN']]
@@ -102,8 +100,6 @@ class NHANES:
             df_proc.append(prepr_col)
         self.dataset = pd.concat(df_proc, axis=1)
 
-        print("DATASET VALUES POSTPROC:")
-        print(self.dataset.values)
         return self.dataset
 
 
@@ -437,7 +433,6 @@ class Dataset():
         inds_valid = ~ pd.isna(target)
         features = features[inds_valid]
         target = target[inds_valid]
-        
 
         # Put each person in the corresponding bin
         targets = np.full((target.shape[0]), 3)
