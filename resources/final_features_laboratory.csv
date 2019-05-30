@@ -1,0 +1,22 @@
+Variable Name,Variable Description
+URXUAS,"Urinary arsenic, total (ug/L)"
+LBXBPB,Blood lead (ug/dL)
+LBXBCD,Blood cadmium (ug/L)
+LBXTHG,"Blood mercury, total (ug/L)"
+LBXBSE,Blood selenium (ug/L)
+LBXBMN,Blood manganese (ug/L)
+URXUHG,Urine Mercury (ng/mL)
+URXUBA,"Barium, urine (ug/L)"
+URXUCD,"Cadmium, urine (ug/L)"
+URXUCO,"Cobalt, urine (ug/L)"
+URXUCS,"Cesium, urine (ug/L)"
+URXUMO,"Molybdenum, urine (ug/L)"
+URXUMN,"Manganese, urine (ug/L)"
+URXUPB,"Lead, urine (ug/L)"
+URXUSB,"Antimony, urine (ug/L)"
+URXUSN,"Tin, urine (ug/L)"
+URXUSR,"Strontium, urine (ug/L)"
+URXUTL,"Thallium, urine (ug/L)"
+URXUTU,"Tungsten, urine (ug/L)"
+URXUUR,"Uranium, urine (ug/L)"
+LBXTC,Total Cholesterol

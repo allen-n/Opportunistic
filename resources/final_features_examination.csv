@@ -1,0 +1,10 @@
+Variable Name,Variable Description
+BMXWT,Weight (kg)
+BMXHT,Standing Height (cm)
+BMXWAIST,Waist Circumference (cm)
+BPXCHR,60-second heart rate
+BPXPLS,60-second pulse
+BPXPULS,Pulse regular or irregular
+BPXSY1,Systolic BP in mm Hg
+BPXDI1,Diastolic BP in mm Hg
+BMXBMI,BMI
