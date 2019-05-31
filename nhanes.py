@@ -107,6 +107,16 @@ class NHANES:
 def preproc_onehot(df_col, args=None):
     return pd.get_dummies(df_col, prefix=df_col.name, prefix_sep='#')
 
+def preproc_minmax(df_col, args=None):
+    if args is None:
+        args = {'cutoff': np.inf}
+    # other answers as nan
+    df_col[df_col > args['cutoff']] = np.nan
+    # nan replaced by mean
+    df_col[pd.isna(df_col)] = df_col.mean()
+    # statistical standardization
+    df_col = (df_col - df_col.min()) / (df_col.max() - df_col.min())
+    return df_col
 
 def preproc_real(df_col, args=None):
     if args is None:
@@ -118,19 +128,7 @@ def preproc_real(df_col, args=None):
     # statistical normalization
     df_col = (df_col-df_col.mean()) / df_col.std()
     return df_col
-
-
-def preproc_discrete(df_col, args=None):
-    if args is None:
-        args = {'cutoff': np.inf}
-    # other answers as nan
-    df_col[df_col > args['cutoff']] = np.nan
-    # nan replaced by mean
-    df_col[pd.isna(df_col)] = df_col.mean()
-    # statistical standardization
-    df_col = (df_col - df_col.min()) / (df_col.max() - df_col.min())
-    return df_col
-
+    # return preproc_minmax(df_col, args)
 
 def preproc_cutoff(df_col, cutoff_val=None):
     if cutoff_val is None:
