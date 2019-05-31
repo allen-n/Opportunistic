@@ -231,12 +231,12 @@ class Dataset():
             # information, with Non-Hispanic Asian Category
             FeatureColumn('Demographics', 'RIDRETH3',
                           preproc_onehot, None),
-            # Annual household income
+            # Annual household income, preproc_discrete
             FeatureColumn('Demographics', 'INDHHIN2',
-                          preproc_discrete, {'cutoff': 15}),
-            # Annual family income
+                          preproc_onehot, {'cutoff': 15}),
+            # Annual family income, preproc_discrete
             FeatureColumn('Demographics', 'INDFMIN2',
-                          preproc_discrete, {'cutoff': 15}),
+                          preproc_onehot, {'cutoff': 15}),
             # Ratio of family income to poverty
             FeatureColumn('Demographics', 'INDFMPIR',
                           preproc_real, {'cutoff': 5}),
@@ -387,8 +387,8 @@ class Dataset():
             # Ever told doctor had trouble sleeping?
             FeatureColumn('Questionnaire', 'SLQ050',
                           preproc_onehot, {'cutoff': 3}),
-            # Cigarettes smoked in entire life
-            FeatureColumn('Questionnaire', 'SMQ621', preproc_discrete, {
+            # Cigarettes smoked in entire life, preproc_discrete
+            FeatureColumn('Questionnaire', 'SMQ621', preproc_onehot, {
                           'cutoff': 8}),
             # How many days used an e-cigarette?
             FeatureColumn('Questionnaire', 'SMQ905', preproc_real, {
