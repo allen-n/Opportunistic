@@ -105,9 +105,6 @@ class NHANES:
 
 # Preprocessing functions
 def preproc_onehot(df_col, args=None):
-    if args is not None:
-        if args['impute'] == 'mode':
-            df_col[pd.isna(df_col)] = df_col.mode()
     return pd.get_dummies(df_col, prefix=df_col.name, prefix_sep='#')
 
 
