@@ -1,26 +1,20 @@
-RIDAGEYR
-INDFMPIR
-BMXHT
-BMXWAIST
-LBXTC
-BMXWT
-BMXLEG
-BPXPLS
-BMXBMI
-LBXBPB
-LBXBCD
-ALQ120Q
-SMD030
-LBXTHG
-ALQ130
-DR1TSUGR
-DR2TKCAL
-DR1TKCAL
-DR2TSUGR
-DMDEDUC2#3.0
-DBQ700#3.0
-INDHHIN2#3.0
-INDFMIN2#3.0
-DMDEDUC2#4.0
-RIAGENDR#1.0
-DMDEDUC2#5.0
+Code,Description,Data Category
+RIDAGEYR,Participant gender,Demographic
+INDFMPIR,Ratio of family income to poverty,Demographic
+BMXHT,Standing Height (cm),Examination
+BMXLEG,Upper Leg Length (cm),Examination
+BMXWAIST,Waist Circumference (cm),Examination
+LBXTC,Total Cholesterol( mg/dL),Laboratory
+BPXPLS,60-second pulse,Examination
+BMXBMI,Body Mass Index (kg/m**2),Examination
+BMXWT,Weight (kg),Examination
+LBXBPB,Blood lead (ug/dL),Laboratory
+LBXBCD,Blood cadmium (ug/L),Laboratory
+ALQ120Q, How often drink alcohol over past 12 mos,Questionnaire
+SMD030,Age started smoking cigarettes regularly,Questionnaire
+ALQ130,Avg # alcoholic drinks/day - past 12 mos,Questionaire
+LBXTHG,"Blood mercury, total (ug/L)",Laboratory
+DR1TKCAL,Kcal consumed,Dietary
+DR1TSUGR,Sugar Consumed (g),Dietary
+DMDEDUC2#4.0,Education level - Adults 20+: Some college or AA degree,Demographic
+DBQ700#3.0,How healthy is the diet: Good,Questionaire

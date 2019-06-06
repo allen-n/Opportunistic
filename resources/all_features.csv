@@ -1,0 +1,69 @@
+Variable Name,Variable Description,Data Type
+RIAGENDR,Participant gender,Demographic
+RIDAGEYR,Age in years at screening,Demographic
+RIDRETH3,"Recode of reported race and Hispanic origin information, with Non-Hispanic Asian Category",Demographic
+DMDEDUC2,Education level - Adults 20+,Demographic
+INDHHIN2,Annual household income,Demographic
+INDFMIN2,Annual family income,Demographic
+INDFMPIR,Ratio of family income to poverty,Demographic
+DR1TALCO,Alcohol consumed (g),Dietary
+DR1TKCAL,Kcal consumed,Dietary
+DR1TSUGR,Sugar Consumed (g),Dietary
+DRQSDT1,Weight loss /Low-Calorie Diet,Dietary
+DR2TALCO,Alcohol consumed (g),Dietary
+DR2TKCAL,Kcal consumed,Dietary
+DR2TSUGR,Sugar Consumed (g),Dietary
+BMXWT,Weight (kg),Examination
+BMXHT,Standing Height (cm),Examination
+BMXWAIST,Waist Circumference (cm),Examination
+BPXCHR,60-second heart rate,Examination
+BPXPLS,60-second pulse,Examination
+BPXPULS,Pulse regular or irregular,Examination
+BPXSY1,Systolic BP in mm Hg,Examination
+BPXDI1,Diastolic BP in mm Hg,Examination
+URXUAS,"Urinary arsenic, total (ug/L)",Laboratory
+LBXBPB,Blood lead (ug/dL),Laboratory
+LBXBCD,Blood cadmium (ug/L),Laboratory
+LBXTHG,"Blood mercury, total (ug/L)",Laboratory
+LBXBSE,Blood selenium (ug/L),Laboratory
+LBXBMN,Blood manganese (ug/L),Laboratory
+URXUHG,Urine Mercury (ng/mL),Laboratory
+URXUBA,"Barium, urine (ug/L)",Laboratory
+URXUCD,"Cadmium, urine (ug/L)",Laboratory
+URXUCO,"Cobalt, urine (ug/L)",Laboratory
+URXUCS,"Cesium, urine (ug/L)",Laboratory
+URXUMO,"Molybdenum, urine (ug/L)",Laboratory
+URXUMN,"Manganese, urine (ug/L)",Laboratory
+URXUPB,"Lead, urine (ug/L)",Laboratory
+URXUSB,"Antimony, urine (ug/L)",Laboratory
+URXUSN,"Tin, urine (ug/L)",Laboratory
+URXUSR,"Strontium, urine (ug/L)",Laboratory
+URXUTL,"Thallium, urine (ug/L)",Laboratory
+URXUTU,"Tungsten, urine (ug/L)",Laboratory
+URXUUR,"Uranium, urine (ug/L)",Laboratory
+MCQ080,Doctor ever said you were overweight,Questionaire
+MCQ365a,Doctor told you to lose weight,Questionaire
+MCQ365b,Doctor told you to exercise,Questionaire
+MCQ365d,Doctor told you to reduce fat/calories,Questionaire
+MCQ365c,Doctor told you to reduce salt in diet,Questionaire
+MCQ370a,Are you now controlling or losing weight,Questionaire
+MCQ370b,Are you now increasing exercise,Questionaire
+MCQ370c,Are you now reducing salt in diet,Questionaire
+MCQ370d,Are you now reducing fat in diet,Questionaire
+INDFMMPI,Family monthly poverty level index,Questionaire
+IND310,Total savings/cash assets for the family,Questionaire
+DBQ700,How healthy is the diet,Questionaire
+DBD895,# of meals not home prepared,Questionaire
+DBD900,# of meals from fast food or pizza place,Questionaire
+CBQ540,Used nutrition info to choose fast foods,Questionaire
+CBQ585,Used nutrition info in restaurant,Questionaire
+ALQ130,Avg # alcoholic drinks/day - past 12 mos,Questionaire
+ALQ141Q,# days have 4/5 drinks - past 12 mos,Questionaire
+PAD645,Minutes walk/bicycle for transportation per day (average),Questionaire
+PAQ677,Past wk # days cardiovascular exercise,Questionaire
+SLD012,Sleep hours,Questionaire
+SLQ050,Ever told doctor had trouble sleeping?,Questionaire
+SMQ621,Cigarettes smoked in entire life,Questionaire
+SMQ905,How many days used an e-cigarette?,Questionaire
+SMD480,In past week # days person smoked inside,Questionaire
+SMDANY,Used any tobacco product last 5 days?,Questionaire
