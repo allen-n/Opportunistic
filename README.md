@@ -1,17 +1,10 @@
 # CS205 Final Project - Spring 2019
 
-## _Feedback from Orpaz_ 
-* Pick data from several different categories (demographic, lab, exam) that could be relevant, _then_ perform feature validation analysis on them
-
-## Resources:
-Report [here](https://docs.google.com/document/d/1jUftd13rJ3P60uLVy4d9HDaSETmk_iaZchPTOLEFdzA/edit?usp=sharing)
-
-Sci-Kit Learn Feature Selection Module Docs [here](https://scikit-learn.org/stable/modules/feature_selection.html)
-
-70 initially selected labels in [resources/initial_labels.csv](/resources/initial_labels.csv)
-
-
 ## Allen's Notes:
+### Documents:
+* Final report linked [here](CS205_Final_AllenNikka.pdf)
+
+## Initial Approach Plan:
 ### Feature Selection and Evaluation:
 * Implement a new data-loader that will iterate through entire data set in batches and perform PCA on the batches, saving indices of top X% variance features
 * Initial idea: select an additional 30 features that _could_ be relevant
